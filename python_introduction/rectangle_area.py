@@ -2,4 +2,4 @@ length = 10
 width = 5
 area = lenght * width
 print ("area")
-print = (f"The simple interest is: {"area"}")
+print (f"The simple interest is: {"area"}")

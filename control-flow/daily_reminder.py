@@ -1,38 +1,53 @@
-# daily_reminder.py
+#!/usr/bin/env python3
 
-# Loop to ensure proper user input
-while True:
-    task = input("Enter your task for today: ")
-    priority = input("Enter the priority level (high/medium/low): ").lower()
-    time_bound = input("Is the task time-bound? (yes/no): ").lower()
+def daily_reminder():
+    print("🌟 Daily Priority Task Reminder 🌟")
+    print("---------------------------------")
 
-    # Validate priority input
-    if priority not in ("high", "medium", "low"):
-        print("Please enter a valid priority level: high, medium, or low.\n")
-        continue
+    # Loop until valid task input is provided
+    while True:
+        task = input("Enter your SINGLE priority task for today: ").strip()
+        if task:
+            break
+        print("⚠️  Task cannot be empty. Try again.")
 
-    # Validate time_bound input
-    if time_bound not in ("yes", "no"):
-        print("Please answer 'yes' or 'no' for whether the task is time-bound.\n")
-        continue
+    # Loop until valid priority input is provided
+    while True:
+        priority = input("Enter task priority (high/medium/low): ").strip().lower()
+        if priority in ('high', 'medium', 'low'):
+            break
+        print("⚠️  Invalid priority. Please enter 'high', 'medium', or 'low'.")
 
-    break  # Exit loop if inputs are valid
+    # Loop until valid time-bound input is provided
+    while True:
+        time_bound = input("Is this task time-sensitive? (yes/no): ").strip().lower()
+        if time_bound in ('yes', 'no'):
+            break
+        print("⚠️  Please answer 'yes' or 'no'.")
 
-# Base reminder message using match-case
-match priority:
-    case "high":
-        reminder = f"🔴 HIGH PRIORITY: Don't forget to '{task}'."
-    case "medium":
-        reminder = f"🟠 MEDIUM PRIORITY: Try to complete '{task}' today."
-    case "low":
-        reminder = f"🟢 LOW PRIORITY: You might work on '{task}' if there's time."
-    case _:
-        reminder = f"⚪ Task: '{task}'."
+    # Generate reminder using match-case and conditionals
+    print("\n🔔 Your Customized Reminder:")
+    print(f"Task: {task}")
+    
+    match priority:
+        case 'high':
+            urgency = "❗Top priority"
+        case 'medium':
+            urgency = "⏳ Medium priority"
+        case 'low':
+            urgency = "💤 Low priority"
+    
+    time_sensitive_part = " that requires immediate attention today!" if time_bound == 'yes' else " (flexible timing)."
+    
+    print(f"Status: {urgency}{time_sensitive_part}")
 
-# Append message if task is time-bound
-if time_bound == "yes":
-    reminder += " This is a time-sensitive task that requires immediate attention today!"
+    # Additional encouragement based on priority
+    if priority == 'high' and time_bound == 'yes':
+        print("\n🚨 Warning! This is critical and time-sensitive! Handle this first!")
+    elif priority == 'low' and time_bound == 'no':
+        print("\n☕ You can schedule this at your convenience.")
+    else:
+        print("\n📌 Make sure to address this today.")
 
-# Display the final reminder
-print("\nYour Reminder:")
-print(reminder)
+if __name__ == "__main__":
+    daily_reminder()

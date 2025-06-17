@@ -1,21 +1,41 @@
-from class_static_methods_demo import Calculator
-
-def main():
-    # Using the static method
-    sum_result = Calculator.add(10, 5)
-    print(f"The sum is: {sum_result}")
-
-    # Using the class method
-    product_result = Calculator.multiply(10, 5)
-    print(f"The product is: {product_result}")
-
-    # Demonstrating class attribute modification
-    print("\nChanging calculation type...")
-    Calculator.change_calculation_type("Basic Math Operations")
+class Calculator:
+    """A calculator class demonstrating class and static methods"""
     
-    # Showing the change affects all instances
-    product_result2 = Calculator.multiply(3, 4)
-    print(f"The new product is: {product_result2}")
-
-if __name__ == "__main__":
-    main()
+    # Class attribute
+    calculation_type = "Arithmetic Operations"
+    
+    @staticmethod
+    def add(a: float, b: float) -> float:
+        """
+        Static method to add two numbers
+        Args:
+            a (float): First number
+            b (float): Second number
+        Returns:
+            float: Sum of a and b
+        """
+        return a + b
+    
+    @classmethod
+    def multiply(cls, a: float, b: float) -> float:
+        """
+        Class method to multiply two numbers
+        Args:
+            cls: Reference to the class
+            a (float): First number
+            b (float): Second number
+        Returns:
+            float: Product of a and b
+        """
+        print(f"Calculation type: {cls.calculation_type}")
+        return a * b
+    
+    @classmethod
+    def change_calculation_type(cls, new_type: str):
+        """
+        Class method to modify the class attribute
+        Args:
+            cls: Reference to the class
+            new_type (str): New value for calculation_type
+        """
+        cls.calculation_type = new_type
